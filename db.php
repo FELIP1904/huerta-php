@@ -3,8 +3,7 @@ function cargarEnv() {
     $envPath = dirname(__DIR__) . '/.env';
     
     if (!file_exists($envPath)) {
-        // Si no existe .env, usar valores por defecto (para desarrollo local)
-        // ⚠️ En producción esto debería fallar explícitamente
+       
         return [
             'DB_HOST' => 'localhost',
             'DB_USER' => '', 
@@ -17,12 +16,11 @@ function cargarEnv() {
     $envVars = [];
     
     foreach ($lines as $line) {
-        // Ignorar comentarios
+       
         if (strpos(trim($line), '#') === 0) {
             continue;
         }
-        
-        // Separar nombre y valor
+
         list($name, $value) = explode('=', $line, 2);
         $envVars[trim($name)] = trim($value);
     }
@@ -39,7 +37,7 @@ $usuario = $env['DB_USER'];
 $contra = $env['DB_PASS'];     
 $basedatos = $env['DB_NAME'];
 
-// Establecer conexión
+
 $conexion = mysqli_connect($host, $usuario, $contra, $basedatos);
 
 if (!$conexion) {
